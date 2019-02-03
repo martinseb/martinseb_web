@@ -1,0 +1,26 @@
+@import 'styles/_colors';
+@import 'styles/_buttons';
+
+*
+{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+html
+{
+  background-color: $clr-light;
+}
+
+h1, h2, h3, h4, h5
+{
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+@import 'styles/_underConstruction';
