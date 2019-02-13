@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {TweenMax, Power0} from 'gsap';
+import {TimelineMax, Power0} from 'gsap';
 
 class PlanetaryGears extends Component {
   constructor(props){
@@ -10,40 +10,40 @@ class PlanetaryGears extends Component {
     this.planetsGears = [];
     this.planetsGroup = null;
 
-    this.rpm = 1;
+    this.rpm = 0.75;
+    this.tl = new TimelineMax();
   }
 
   componentDidMount() {
-    TweenMax.fromTo(this.ringGear, (60/this.rpm), {rotation: 0}, {
+    this.tl.fromTo(this.ringGear, (60/this.rpm), {rotation: 0}, {
       rotation: 360,
       transformOrigin: 'center, center',
       ease: Power0.easeNone,
       repeat: -1
-    });
-    TweenMax.fromTo(this.sunGear, (60/this.rpm)/5, {rotation: 0}, {
+    }, 0).fromTo(this.sunGear, (60/this.rpm)/5, {rotation: 0}, {
       rotation: -360,
       transformOrigin: 'center, center',
       ease: Power0.easeNone,
       repeat: -1
-    });
-    TweenMax.fromTo(this.planetsGears, (60/this.rpm)/8, {rotation: 0}, {
+    }, 0).fromTo(this.planetsGears, (60/this.rpm)/8, {rotation: 0}, {
       rotation: 360,
       transformOrigin: 'center, center',
       ease: Power0.easeNone,
       repeat: -1
-    });
-    TweenMax.fromTo(this.planetsGroup, (60/this.rpm), {rotation: 0}, {
+    }, 0).fromTo(this.planetsGroup, (60/this.rpm), {rotation: 0}, {
       rotation: -360,
       svgOrigin: '500, 500',
       ease: Power0.easeNone,
       repeat: -1
-    });
+    }, 0);
+
+    this.tl.play();
   }
 
   render() {
     return (
       <div className="PlanetaryGears">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1000">
+        <svg version="1.1" id="GearsSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1000">
           <path ref={svg => this.sunGear = svg}
             d="M567.3,731.7c-3.8-3.5-7.4-7.2-10.7-11.2c-3.5-4.3-6.7-8.8-9.2-13.8c-0.7-1.3-1.3-2.7-1.8-4.1c-0.5-1.3-0.7-2.7-1.1-4.1
           c-0.7-2.7-1.8-5.4-3.5-7.6c-0.7-0.9-1.8-2.2-3-2.3c-0.6-0.1-1.3,0.2-1.9,0.2c-1.1,0.1-2.2,0.3-3.3,0.4c-3.1,0.4-6.1,1-9.2,1.6

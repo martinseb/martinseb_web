@@ -1,5 +1,6 @@
 @import 'styles/_colors';
 @import 'styles/_buttons';
+@import 'styles/_scrollbar';
 
 *
 {
@@ -12,6 +13,8 @@
 html
 {
   background-color: $clr-light;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 h1, h2, h3, h4, h5
@@ -24,4 +27,7 @@ h1, h2, h3, h4, h5
 }
 
 @import 'styles/components/_planetaryGears';
+@import 'styles/components/_welcome';
+@import 'styles/components/_navbar';
+@import 'styles/components/_aboutMe';
 @import 'styles/components/_underConstruction';
