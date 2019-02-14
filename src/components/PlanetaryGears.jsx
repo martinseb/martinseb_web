@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import {TimelineMax, Power0} from 'gsap';
+import {TimelineMax, Power0, Back} from 'gsap';
 
 class PlanetaryGears extends Component {
   constructor(props){
@@ -9,6 +10,9 @@ class PlanetaryGears extends Component {
     this.ringGear = null;
     this.planetsGears = [];
     this.planetsGroup = null;
+
+    this.svg = null;
+    this.div = null;
 
     this.rpm = 0.75;
     this.tl = new TimelineMax();
@@ -38,12 +42,47 @@ class PlanetaryGears extends Component {
     }, 0);
 
     this.tl.play();
+    this.tl.timeScale(2);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    var loaderTl = new TimelineMax();
+    var duration = 1.2;
+    if (!this.props.isLoading) {
+      this.tl.timeScale(1);
+      loaderTl.to([this.ringGear, this.sunGear, this.planetsGears], duration, {
+        'fill-opacity': 0.1,
+        'stroke-opacity': 0.25,
+      }, 0).to(this.svg, duration, {
+        width: '80vh',
+        height: '80vh',
+        margin: '50vh -90vw 0 0',
+        ease: Back.easeOut
+      }, 0).to(this.div, duration/2, {
+        'z-index': -1,
+      }, 0);
+    }
+    else {
+      this.tl.timeScale(2);
+      loaderTl.to([this.ringGear, this.sunGear, this.planetsGears], duration, {
+        'fill-opacity': 0.25,
+        'stroke-opacity': 1,
+      }, 0).to(this.svg, duration, {
+        width: '60vh',
+        height: '60vh',
+        margin: '20vh 0 0 0',
+        ease: Back.easeOut
+      }, 0).to(this.div, 0.1, {
+        'z-index': 10,
+      }, 0);
+    }
+    loaderTl.play();
   }
 
   render() {
     return (
-      <div className="PlanetaryGears">
-        <svg version="1.1" id="GearsSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1000">
+      <div className="PlanetaryGears" ref={div => this.div = div}>
+        <svg ref={svg => this.svg = svg} version="1.1" id="GearsSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
           <path ref={svg => this.sunGear = svg}
             d="M567.3,731.7c-3.8-3.5-7.4-7.2-10.7-11.2c-3.5-4.3-6.7-8.8-9.2-13.8c-0.7-1.3-1.3-2.7-1.8-4.1c-0.5-1.3-0.7-2.7-1.1-4.1
           c-0.7-2.7-1.8-5.4-3.5-7.6c-0.7-0.9-1.8-2.2-3-2.3c-0.6-0.1-1.3,0.2-1.9,0.2c-1.1,0.1-2.2,0.3-3.3,0.4c-3.1,0.4-6.1,1-9.2,1.6
@@ -484,5 +523,9 @@ class PlanetaryGears extends Component {
     );
   }
 }
+
+PlanetaryGears.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+};
 
 export default PlanetaryGears;

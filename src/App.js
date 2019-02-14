@@ -13,10 +13,23 @@ import Contact from './components/Contact.jsx';
 import UnderConstruction from './components/UnderConstruction.jsx';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({isLoading: false});
+    }, 1200);
+  }
+
   render() {
     return (
-      <div className="App" onScroll={() => this.handleScroll()}>
-        <PlanetaryGears />
+      <div className={"App"+(this.state.isLoading?" Hide":"")} onScroll={() => this.handleScroll()}>
+        <PlanetaryGears isLoading={this.state.isLoading}/>
         <Welcome />
         <Navbar />
         <AboutMe />

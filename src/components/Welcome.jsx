@@ -6,7 +6,7 @@ export default class Welcome extends Component {
       <section className="Welcome container">
         <div className="row">
           <div className="one-third column">
-            <img src="/img/meImg.jpg" alt="Martin's photograph" className="WelcomeImg u-max-full-width"/>
+            <img src="/img/me.jpg" alt="Martin's photograph" className="WelcomeImg u-max-full-width"/>
           </div>
           <div className="two-thirds column WelcomeText">
             <h1>I'm <b>Martin</b>, <br/> web designer and developer.</h1>

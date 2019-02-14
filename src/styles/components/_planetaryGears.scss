@@ -1,39 +1,22 @@
 .PlanetaryGears{
-  transition: 1000ms ease;
-  z-index: -1;
+  background-color: $clr-light;
+  z-index: 10;
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 60vh;
-  height: 60vh;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  #GearsSvg
+  {
+    margin-top: 20vh;
+    width: 60vh;
+    height: 60vh;
+  }
   path
   {
-    fill: $clr-red;
-    fill-opacity: 0.1;
-    stroke: $clr-red;
-    stroke-opacity: 0.25;
-  }
-
-  &.Loader
-  {
-    z-index: 10;
-    background-color: $clr-light;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    #GearsSvg
-    {
-      margin-top: 25vh;
-      width: 25vw;
-      height: 25vh;
-    }
-    path
-    {
-      fill: $clr-red;
-      fill-opacity: 1;
-      stroke: $clr-dark;
-      stroke-opacity: 1;
-    }
+    fill: $clr-dark;
+    fill-opacity: 0.25;
+    stroke: $clr-dark;
+    stroke-opacity: 1;
   }
 }
